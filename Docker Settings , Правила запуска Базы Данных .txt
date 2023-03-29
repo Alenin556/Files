@@ -1,0 +1,26 @@
+Прописание команд в командной строке , это создание отдельного контейнера , контейнер который создает в IDEA будет отличаться и они никак между собой не зависимы, и взаимодейстовать не будут
+
+docker run -d --name myPractice -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_USER=alenin55661 -e POSTGRES_DB=data_base -p 5432:5432 postgres
+ 
+docker run -d --name mySQLhmwrk -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=DataBase -e MYSQL_USER=Alenin -e MYSQL_PASSWORD=mysecretpassword -v /schema:/docker-entrypoint-initdb.d -p 3306:3306 mysql:8
+
+
+Правильный порядок запуска базы данных через docker : 
+
+1.создать файлы с настройками properties , yml , положить приложение java в проект 
+2.прописать одинкавые environment в yml и properties
+
+3.создать на базе настроек контейнер с окружением например : 
+docker run -d --name myPractice -e POSTGRES_PASSWORD=mysecretpassword -e POSTGRES_USER=alenin55661 -e POSTGRES_DB=data_base -p 5432:5432 postgres
+прописать теже настройки что и в файлах ранее 
+
+4.поднять базу данных в идеи docker-compose up 
+5.после поднятия базы данных поднять приложение java -имя файла 
+
+6*.в случае ошибки : 
+1)для внесения изменения первоначально необходимо положить базу данных docker-compose down 
+2)удалить каталог во вкладке services  *volume 
+3)внести правки 
+5)поднять контейнер с базой данных *docker compose up
+6)запустить приложение jav -jar ....
+7)проверить вступили ли изменения в работу , при переходе на url 
